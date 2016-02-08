@@ -2,6 +2,7 @@ package com.cs407_android.rockpaperscissors;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -161,34 +162,6 @@ public class PlayFragment extends Fragment {
                 }
             }
         });
-
-        if(player2Choice != null && player1Choice != null) {
-            if(player2Choice.compareTo(getString(R.string.paper)) == 0){
-                if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
-                    displayWinner("TIE!");
-                } else if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
-                    displayWinner(getString(R.string.player_2_header));
-                } else {
-                    displayWinner(getString(R.string.player_1_header));
-                }
-            } else if(player2Choice.compareTo(getString(R.string.rock)) == 0){
-                if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
-                    displayWinner("TIE!");
-                } else if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
-                    displayWinner(getString(R.string.player_2_header));
-                } else {
-                    displayWinner(getString(R.string.player_1_header));
-                }
-            } else {
-                if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
-                    displayWinner("TIE!");
-                } else if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
-                    displayWinner(getString(R.string.player_2_header));
-                } else {
-                    displayWinner(getString(R.string.player_1_header));
-                }
-            }
-        }
     }
 
     private void decideWinner(){
@@ -203,7 +176,7 @@ public class PlayFragment extends Fragment {
                 }
             } else if(player2Choice.compareTo(getString(R.string.rock)) == 0){
                 if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
-                    displayWinner("TIE!");
+                    displayWinner("Tie!");
                 } else if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
                     displayWinner(getString(R.string.player_2_header));
                 } else {
@@ -211,7 +184,7 @@ public class PlayFragment extends Fragment {
                 }
             } else {
                 if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
-                    displayWinner("TIE!");
+                    displayWinner("Tie!");
                 } else if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
                     displayWinner(getString(R.string.player_2_header));
                 } else {
@@ -235,12 +208,15 @@ public class PlayFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO start a rematch!
+                        getFragmentManager()
+                                .popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                     }
                 })
                 .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //TODO back out the the start screen
+                        getActivity().finish();
                     }
                 })
                 .show();
