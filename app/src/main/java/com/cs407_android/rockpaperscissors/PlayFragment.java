@@ -106,9 +106,16 @@ public class PlayFragment extends Fragment {
 
                 if(player1Choice == null) {
                    //TODO player 1 chose Rock
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getString(R.string.rock),null))
+                            .addToBackStack(null)
+                            .commit();
                 }
                 else{
                     //TODO player 2 chose Rock
+                    player2Choice = getString(R.string.rock);
+                    decideWinner();
                 }
 
             }
@@ -120,11 +127,17 @@ public class PlayFragment extends Fragment {
 
                 if(player1Choice == null) {
                     //TODO
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getString(R.string.paper),null))
+                            .addToBackStack(null)
+                            .commit();
 
                 }
                 else{
                     //TODO
-
+                    player2Choice = getString(R.string.paper);
+                    decideWinner();
                 }
             }
         });
@@ -135,14 +148,77 @@ public class PlayFragment extends Fragment {
 
                 if(player1Choice == null) {
                     //TODO
-
+                    getFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_fragment_container, PlayFragment.newInstance(getString(R.string.scissors),null))
+                            .addToBackStack(null)
+                            .commit();
                 }
                 else{
                     //TODO
-
+                    player2Choice = getString(R.string.scissors);
+                    decideWinner();
                 }
             }
         });
+
+        if(player2Choice != null && player1Choice != null) {
+            if(player2Choice.compareTo(getString(R.string.paper)) == 0){
+                if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            } else if(player2Choice.compareTo(getString(R.string.rock)) == 0){
+                if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            } else {
+                if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            }
+        }
+    }
+
+    private void decideWinner(){
+        if(player2Choice != null && player1Choice != null) {
+            if(player2Choice.compareTo(getString(R.string.paper)) == 0){
+                if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            } else if(player2Choice.compareTo(getString(R.string.rock)) == 0){
+                if(player1Choice.compareTo(getString(R.string.rock)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            } else {
+                if(player1Choice.compareTo(getString(R.string.scissors)) == 0) {
+                    displayWinner("TIE!");
+                } else if(player1Choice.compareTo(getString(R.string.paper)) == 0) {
+                    displayWinner(getString(R.string.player_2_header));
+                } else {
+                    displayWinner(getString(R.string.player_1_header));
+                }
+            }
+        }
     }
 
 
